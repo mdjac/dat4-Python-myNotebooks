@@ -23,7 +23,8 @@ filtered_data = data[~data["iso_code"].str.startswith("OWID_")]
 
 #Copies the data, and doesn't keep reference to old dataframe
 copied_data = filtered_data.copy(deep=True)
-question4.main(copied_data,'2021-03-31',"Denmark","Sweden","Norway")
+question2.main(copied_data)
+#question4.main(copied_data,'2021-03-31',"Denmark","Sweden","Norway")
 
 
 
