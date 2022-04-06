@@ -12,6 +12,10 @@ def main(data):
     from_month = pd.to_datetime('2021-06').to_period('m')
     data_european_countries = data_european_countries[data_european_countries["date"] > from_month]
 
+    #Eksempel nedenfor er eksempel fra en anden i klassen til at bruge agg istedet for sum funktionen.
+    ''' max_cases = df[mask].groupby('location').agg({'total_tests_per_thousand': [
+    'max']})
+    max_cases.sort_values([('total_tests_per_thousand', 'max')], ascending=False).head(10) '''
 
     #Sum af test pr 1000 for alle lande
     data_european_countries = data_european_countries.groupby(["location"])["new_tests_per_thousand"].sum().reset_index()
