@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
+import sklearn
+from sklearn.metrics.cluster import adjusted_rand_score, adjusted_mutual_info_score
 from sklearn.cluster import MeanShift, estimate_bandwidth
 mpl.use("pdf")
 
@@ -14,6 +16,8 @@ plot with a scatter plot each iris flower sample colored by label (3 different c
 iris = pd.read_csv('../../data/iris_data.csv', decimal=",")
 iris = iris.drop(columns=["Petal length","Petal width"])
 
+#Used for test with christian
+iris_copy = iris.copy(deep=True)
 
 d = dict(tuple(iris.groupby("Species")))
 print(type(d["I. setosa"]))
@@ -80,4 +84,27 @@ for i in range(len(cluster_centers)):
     ax2.scatter(cluster_centers[i][0],cluster_centers[i][1],c="k", s=100, linewidth=0.2)
 
 fig2.savefig('3_2.png', bbox_inches='tight')
+
+
+#Test with Christian for 3rd assignment in python
+
+#Label encoding
+iris_copy["Species"] = iris_copy["Species"].astype('category')
+iris_copy["Category"] = iris_copy["Species"].cat.codes
+
+labels_true = iris_copy["Category"].tolist()
+labels_pred = labels.tolist()
+
+print(labels_true)
+print(labels_pred)
+print('The scikit-learn version is {}.'.format(sklearn.__version__))
+result = adjusted_rand_score(labels_true, labels_pred)
+print(result)
+
+test1 = [1,1,1,2,2,2,3,0,1,2,3,4,10,6]
+test2 = [1,1,1,2,2,2,3,0,1,2,100000,4,10,10]
+
+result2 = adjusted_rand_score(test1, test2)
+print(result2)
+
 

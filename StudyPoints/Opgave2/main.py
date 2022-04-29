@@ -98,6 +98,10 @@ def scrape_boligportal_posting(url):
     monthly_price = info_blocks[1].select('.css-uzgi25')[2].getText()
     monthly_price = monthly_price.split(' ')[0]
     monthly_price = monthly_price.replace('.', '')
+    #if , in monthly_price, remove it and the following characters
+    if ',' in monthly_price:
+        monthly_price = monthly_price.replace(',', '')
+        monthly_price = monthly_price[:-3]
     monthly_price = int(monthly_price)
 
     #Double // means integer division
